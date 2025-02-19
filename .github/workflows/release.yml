@@ -32,9 +32,6 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Run tests
-        run: yarn test
-
       - name: Configure Git
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"

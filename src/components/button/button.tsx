@@ -36,7 +36,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {...otherProps}
           >
             {loading
-              ? renderIcon(Loader2, { className: 'w-4 h-4 animate-spin' })
+              ? renderIcon(Loader2, {
+                  className: 'w-4 h-4 animate-spin',
+                  'data-testid': 'loading-spinner',
+                })
               : renderIcon(icon)}
             {renderLabel(label)}
           </BaseButton>
@@ -51,7 +54,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...otherProps}
       >
         {loading
-          ? renderIcon(Loader2, { className: 'w-4 h-4 animate-spin' })
+          ? renderIcon(Loader2, {
+              className: 'w-4 h-4 animate-spin',
+              'data-testid': 'loading-spinner',
+            })
           : renderIcon(icon)}
         {renderLabel(label)}
       </BaseButton>

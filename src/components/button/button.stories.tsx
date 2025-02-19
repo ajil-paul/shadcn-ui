@@ -1,5 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import type { Meta } from '@storybook/react';
 import { Button } from './button';
+import { ButtonProps } from './types';
+import { BrowserRouter } from 'react-router-dom';
+import { Sparkle } from 'lucide-react';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -8,25 +12,41 @@ const meta: Meta<typeof Button> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {
-  args: {
-    children: 'Button',
-  },
-};
+export const Default = (args: ButtonProps) => (
+  <Button {...args} label="Default" />
+);
 
-export const Loading: Story = {
-  args: {
-    children: 'Button',
-    isLoading: true,
-    loadingText: 'Loading...',
-  },
-};
+export const Styles = (args: ButtonProps) => (
+  <div className="flex w-full gap-3">
+    <Button {...args} label="Default" variant="default" />
+    <Button {...args} label="Secondary" variant="secondary" />
+    <Button {...args} label="Destructive" variant="destructive" />
+    <Button {...args} label="Outline" variant="outline" />
+    <Button {...args} label="Ghost" variant="ghost" />
+    <Button {...args} label="Link" variant="link" />
+  </div>
+);
 
-export const Disabled: Story = {
-  args: {
-    children: 'Button',
-    disabled: true,
-  },
-};
+export const Sizes = (args: ButtonProps) => (
+  <div className="flex w-full gap-3">
+    <Button {...args} label="Small" size="sm" />
+    <Button {...args} label="Medium" size="default" />
+    <Button {...args} label="Large" size="lg" />
+  </div>
+);
+
+export const Link = (args: ButtonProps) => (
+  <BrowserRouter>
+    <Button {...args} label="Default" />
+  </BrowserRouter>
+);
+
+export const IconButton = (args: ButtonProps) => (
+  <BrowserRouter>
+    <div className="flex w-full gap-3">
+      <Button {...args} label="Default" icon={Sparkle} />
+      <Button {...args} icon={<Sparkle size={16} />} />
+    </div>
+  </BrowserRouter>
+);

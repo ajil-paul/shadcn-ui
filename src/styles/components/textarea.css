@@ -1,0 +1,15 @@
+.shad-cn-textarea-container {
+  @apply px-2 py-1 !important;
+}
+
+.shad-cn-textarea-container--disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.shad-cn-textarea-container--disabled:hover {
+  border-color: hsl(var(--border)) !important;
+}
+
+.shad-cn-textarea-container--naked {
+  @apply min-h-0 px-0 py-0 bg-transparent border-none rounded-none;
+}

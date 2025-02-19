@@ -1,0 +1,8 @@
+.shad-ui-button--link {
+  color: hsl(var(--link) / 0.8) !important;
+}
+
+.shad-ui-button--link:hover,
+.shad-ui-button--link:focus {
+  color: hsl(var(--link)) !important;
+}

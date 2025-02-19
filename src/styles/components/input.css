@@ -1,0 +1,47 @@
+.shad-cn-input-container {
+  @apply flex items-center w-full h-auto text-sm transition duration-300 ease-linear bg-transparent border gap-x-2 border-input file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-within:outline-none;
+  @apply border rounded-md;
+  border-color: hsl(var(--border));
+}
+
+.shad-cn-input-container:not(.shad-cn-input-container--disabled):hover {
+  border-color: hsl(var(--muted-foreground));
+}
+
+.shad-cn-input-container:focus-within {
+  border-color: hsl(var(--ring)) !important;
+  box-shadow: hsl(var(--ring) / 0.15) 0px 0px 0px 3px;
+}
+
+.shad-cn-input-container--sm {
+  @apply min-h-6 text-xs px-2 py-1.5;
+}
+
+.shad-cn-input-container--md {
+  @apply px-3 min-h-8;
+}
+
+.shad-cn-input-container--lg {
+  @apply px-3 min-h-10;
+}
+
+.shad-cn-input-container--disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.shad-cn-input-container--naked {
+  @apply min-h-0 px-0 py-0 bg-transparent border-none rounded-none focus-within:shadow-none;
+}
+
+.shad-cn-input-container--destructive {
+  border-color: hsl(var(--destructive)) !important;
+}
+
+.shad-cn-input-container--destructive:hover {
+  border-color: hsl(var(--destructive)) !important;
+}
+
+.shad-cn-input-container--destructive:focus-within {
+  border-color: hsl(var(--destructive)) !important;
+  box-shadow: var(--destructive-box-shadow);
+}

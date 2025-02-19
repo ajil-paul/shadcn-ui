@@ -1,0 +1,7 @@
+.shad-ui-radio-group[data-disabled] .shad-ui-radio-group-item-label {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.shad-ui-radio-group-item-label {
+  @apply cursor-pointer;
+}

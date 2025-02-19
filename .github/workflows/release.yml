@@ -56,7 +56,12 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Setup .npmrc
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "@ajil-paul:registry=https://npm.pkg.github.com" >> .npmrc
+
       - name: Publish to GitHub Packages
-        run: yarn publish
+        run: yarn publish --non-interactive
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

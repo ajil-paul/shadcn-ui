@@ -1,8 +1,7 @@
 import type { ReactNode, ElementType } from 'react';
 
-import { ButtonProps as BaseButtonProps } from '@base/button';
-
-export interface ButtonProps extends BaseButtonProps {
+export interface ButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   /**
    * Whether the button is disabled.
    */

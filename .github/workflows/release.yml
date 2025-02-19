@@ -25,6 +25,7 @@ jobs:
           node-version: "20"
           registry-url: "https://npm.pkg.github.com"
           scope: "@ajil-paul"
+          always-auth: true
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -58,10 +59,15 @@ jobs:
 
       - name: Setup .npmrc
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
           echo "@ajil-paul:registry=https://npm.pkg.github.com" >> .npmrc
+          cat .npmrc
 
       - name: Publish to GitHub Packages
-        run: yarn publish --non-interactive
+        run: |
+          echo "Publishing package..."
+          yarn publish --non-interactive --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

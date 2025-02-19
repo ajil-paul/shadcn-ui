@@ -1,9 +1,12 @@
 import React from 'react';
+
+import { Sparkle } from 'lucide-react';
+import { BrowserRouter } from 'react-router-dom';
+
 import type { Meta } from '@storybook/react';
+
 import { Button } from './button';
 import { ButtonProps } from './types';
-import { BrowserRouter } from 'react-router-dom';
-import { Sparkle } from 'lucide-react';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -45,7 +48,7 @@ export const Link = (args: ButtonProps) => (
 export const IconButton = (args: ButtonProps) => (
   <BrowserRouter>
     <div className="flex w-full gap-3">
-      <Button {...args} label="Default" icon={Sparkle} />
+      <Button {...args} icon={Sparkle} label="Default" />
       <Button {...args} icon={<Sparkle size={16} />} />
     </div>
   </BrowserRouter>

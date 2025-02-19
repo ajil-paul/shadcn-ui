@@ -1,3 +1,5 @@
+import type { ReactNode, ElementType } from 'react';
+
 import { ButtonProps as BaseButtonProps } from '@base/button';
 
 export interface ButtonProps extends BaseButtonProps {
@@ -14,7 +16,7 @@ export interface ButtonProps extends BaseButtonProps {
   /**
    * The label displayed on the button. Can be a string or a React node.
    */
-  label?: string | React.ReactNode;
+  label?: string | ReactNode;
 
   /**
    * The `to` prop for navigation (used when working with routing libraries like React Router).
@@ -56,7 +58,7 @@ export interface ButtonProps extends BaseButtonProps {
    * An optional icon to display inside the button.
    * Can be a React node or a React component for an SVG.
    */
-  icon?: React.ElementType | React.ReactNode;
+  icon?: ElementType | ReactNode;
 
   /**
    * The position of the icon relative to the label.

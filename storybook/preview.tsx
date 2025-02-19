@@ -1,7 +1,9 @@
 import React from 'react';
-import { themes } from '@storybook/theming';
-import type { Preview } from '@storybook/react';
+
 import { BrowserRouter } from 'react-router-dom';
+
+import type { Preview } from '@storybook/react';
+import { themes } from '@storybook/theming';
 
 import '../src/index.css';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +15,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled = false,
       label,
       to,
-      href,
       icon,
       iconPosition = 'left',
       ...otherProps
@@ -29,10 +29,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       return (
         <Link to={to}>
           <BaseButton
-            disabled={loading || disabled}
-            className={buttonClassName}
-            variant={otherProps.variant || 'link'}
             ref={ref}
+            className={buttonClassName}
+            disabled={loading || disabled}
+            variant={otherProps.variant || 'link'}
             {...otherProps}
           >
             {loading
@@ -45,9 +45,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <BaseButton
-        disabled={loading || disabled}
         ref={ref}
         className={buttonClassName}
+        disabled={loading || disabled}
         {...otherProps}
       >
         {loading

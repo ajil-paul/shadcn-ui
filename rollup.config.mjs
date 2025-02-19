@@ -16,7 +16,9 @@ const pkg = JSON.parse(
 );
 
 const baseConfig = {
-  input: 'src/index.ts',
+  input: {
+    index: 'src/index.ts',
+  },
   external: [
     ...Object.keys(pkg.peerDependencies || {}),
     'class-variance-authority',

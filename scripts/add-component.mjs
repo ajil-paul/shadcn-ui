@@ -19,6 +19,14 @@ try {
     stdio: 'inherit',
     cwd: path.resolve(__dirname, '..'),
   });
+  execSync(`mkdir src/components/${componentName}`);
+  execSync(`touch src/components/${componentName}/index.ts`);
+  execSync(`touch src/components/${componentName}/types.ts`);
+  execSync(`touch src/components/${componentName}/${componentName}.tsx`);
+  execSync(`touch src/components/${componentName}/${componentName}.test.tsx`);
+  execSync(
+    `touch src/components/${componentName}/${componentName}.stories.tsx`
+  );
   console.log(`✅ Added ${componentName} component`);
 } catch (error) {
   console.error('Failed to add component:', error);

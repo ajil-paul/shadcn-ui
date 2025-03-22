@@ -1,5 +1,16 @@
 export type HtmlTags = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 
+export type TypographyTypes =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'body1'
+  | 'body2'
+  | 'body3';
+
 export interface TypographyProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
@@ -14,7 +25,7 @@ export interface TypographyProps
    * - `body2`: Second body text style.
    * - `body3`: Third body text style.
    */
-  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3';
+  type?: TypographyTypes;
 
   /**
    * Specifies the HTML tag to render as, allowing for flexibility in rendering different elements.

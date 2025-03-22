@@ -2,9 +2,9 @@ import React from 'react';
 
 import clsx from 'clsx';
 
-import { HtmlTags, TypographyProps } from './types';
+import { HtmlTags, TypographyProps, TypographyTypes } from './types';
 
-const componentMap: Record<TypographyProps['type'], HtmlTags> = {
+const componentMap: Record<TypographyTypes, HtmlTags> = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',

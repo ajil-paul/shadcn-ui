@@ -13,6 +13,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.yarn/cache
+            node_modules
+          key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-${{ runner.os }}-
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -24,19 +34,3 @@ jobs:
 
       - name: Run Tests
         run: yarn test
-
-      - name: Extract Passed Specs Count
-        run: |
-          PASSED_COUNT=$(jq '[.testResults[].assertionResults[] | select(.status == "passed")] | length' test-results.json)
-          echo "PASSED_SPECS=$PASSED_COUNT" >> $GITHUB_ENV
-
-      - name: Display Test Results
-        run: |
-          echo "✅ $PASSED_SPECS specs passed"
-          if [ "$FAILED_SPECS" -gt 0 ]; then
-            echo "❌ $FAILED_SPECS specs failed"
-            jq -r '[.testResults[].assertionResults[] | select(.status == "failed") |
-              {name: .fullName, message: .failureMessages[0]}] |
-              map("❌ \(.name)\n   ➜ \(.message)") | .[]' test-results.json
-            exit 1  # Fail the workflow if there are failed tests
-          fi

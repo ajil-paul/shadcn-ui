@@ -45,11 +45,9 @@ Form.parameters = {
   docs: {
     source: {
       code: `
-import { useForm } from "hooks/useForm";
 import * as Yup from "yup";
 
-import FormInput from "@shad-ui/Form/Input";
-import Button from "@shad-ui/Button";
+import { useForm, FormInput, Button } from "@shad-ui";
 
 const Form = (args) => {
   const { control, handleSubmit } = useForm({

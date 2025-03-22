@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Settings2 } from 'lucide-react';
 
-import { Dropdown } from './dropdown-menu';
+import { Dropdown } from './dropdown';
 
 const menuList = [
   { key: 'label', type: 'label', title: 'Label' },

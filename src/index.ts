@@ -8,6 +8,7 @@ export * from './components/select';
 export * from './components/switch';
 export * from './components/textarea';
 export * from './components/typography';
+export * from './components/dropdown';
 
 export * from './components/form';
 

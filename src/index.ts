@@ -9,6 +9,7 @@ export * from './components/switch';
 export * from './components/textarea';
 export * from './components/typography';
 export * from './components/dropdown';
+export * from './components/sidebar';
 
 export * from './components/form';
 

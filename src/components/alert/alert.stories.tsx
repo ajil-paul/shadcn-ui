@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
-import { Alert, AlertProps } from '../alert';
+import { Alert, AlertProps, showAlert } from '../alert';
 import { Button } from '../button/button';
 
 const meta: Meta<typeof Alert> = {
@@ -82,6 +82,24 @@ export const WithTrigger = () => {
           onAction={() => console.log('Item deleted')}
         />
       </div>
+    </div>
+  );
+};
+
+export const ShowAlertMethod = () => {
+  return (
+    <div className="flex justify-center w-full">
+      <Button
+        label="Show alert"
+        onClick={() =>
+          showAlert({
+            title: 'Delete item?',
+            description: 'Are you sure you want to delete this item?',
+            onContinue: () =>
+              new Promise((resolve) => setTimeout(resolve, 2000)),
+          })
+        }
+      />
     </div>
   );
 };

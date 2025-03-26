@@ -16,6 +16,7 @@ import { AlertProps } from './types';
 
 const Alert: React.FC<AlertProps> = ({
   isOpen = false,
+  isLoading = false,
   title,
   description,
   actionLabel = 'Continue',
@@ -39,8 +40,15 @@ const Alert: React.FC<AlertProps> = ({
         <AlertDialogDescription>{description}</AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
-        <Button variant="destructive" onClick={onAction} label={actionLabel} />
+        <AlertDialogCancel disabled={isLoading}>
+          {cancelLabel}
+        </AlertDialogCancel>
+        <Button
+          variant="destructive"
+          onClick={onAction}
+          loading={isLoading}
+          label={actionLabel}
+        />
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

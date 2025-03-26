@@ -1,8 +1,16 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
 
 import { Alert } from './alert';
+import { showAlert } from './show-alert';
 
 describe('Alert', () => {
   const defaultProps = {
@@ -72,5 +80,47 @@ describe('Alert', () => {
     const triggerButton = screen.getByText(triggerButtonProps.label);
     fireEvent.click(triggerButton);
     expect(triggerButtonProps.onClick).toHaveBeenCalled();
+  });
+});
+
+describe('showAlert', async () => {
+  it('should render the alert dialog with given title and description', () => {
+    act(() =>
+      showAlert({ title: 'Test Title', description: 'Test Description' })
+    );
+
+    waitFor(() => expect(screen.getByText('Test Title')).toBeInTheDocument());
+    expect(screen.getByText('Test Description')).toBeInTheDocument();
+  });
+
+  it('should call onContinue when action button is clicked', async () => {
+    const onContinueMock = vi.fn();
+    showAlert({
+      title: 'Test',
+      onContinue: onContinueMock,
+      actionLabel: 'Delete',
+    });
+    await waitFor(() =>
+      expect(screen.getByText('Test Title')).toBeInTheDocument()
+    );
+    const button = screen.getByText('Delete');
+    await userEvent.click(button);
+    expect(onContinueMock).toHaveBeenCalled();
+  });
+
+  it('should call onClose when cancel button is clicked', async () => {
+    const onCloseMock = vi.fn();
+    showAlert({
+      title: 'Test',
+      onClose: onCloseMock,
+      cancelLabel: 'Abort',
+      actionLabel: 'Update',
+    });
+    await waitFor(() =>
+      expect(screen.getByText('Test Title')).toBeInTheDocument()
+    );
+    const button = screen.getByText('Abort');
+    await userEvent.click(button);
+    expect(onCloseMock).toHaveBeenCalled();
   });
 });

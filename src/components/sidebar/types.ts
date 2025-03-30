@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Sidebar } from '@base/sidebar';
 import { Button } from '@components/button';
 
@@ -15,7 +17,12 @@ export interface MenuItemProps {
   /**
    * The path to navigate to when the menu item is clicked.
    */
-  path: string;
+  path?: string;
+
+  /**
+   * To provide external link
+   */
+  href?: string;
 
   /**
    * An icon to be displayed alongside the menu item.
@@ -101,3 +108,9 @@ export interface SidebarProps extends React.ComponentProps<typeof Sidebar> {
 
 export interface SidebarTriggerProps
   extends React.ComponentProps<typeof Button> {}
+
+export interface LinkComponentProps {
+  to: string | undefined;
+  href: string | undefined;
+  children: React.ReactNode;
+}

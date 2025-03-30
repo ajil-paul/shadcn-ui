@@ -17,9 +17,8 @@ export const MENU_ITEMS = [
     key: 'playground',
     title: 'Playground',
     icon: SquareTerminal,
-    isActive: true,
     children: [
-      { key: 'history', title: 'History', path: '#' },
+      { key: 'history', title: 'History', path: '/iframe.html' },
       { key: 'starred', title: 'Starred', path: '#' },
       { key: 'settings', title: 'Settings', path: '#' },
     ],
@@ -39,7 +38,7 @@ export const MENU_ITEMS = [
     title: 'Documentation',
     icon: BookOpen,
     children: [
-      { key: 'introduction', title: 'Introduction', path: '#' },
+      { key: 'introduction', title: 'Introduction', path: '#', isActive: true },
       { key: 'get-started', title: 'Get Started', path: '#' },
       { key: 'tutorials', title: 'Tutorials', path: '#' },
       { key: 'changelog', title: 'Changelog', path: '#' },
@@ -88,7 +87,7 @@ export const FOOTER_MENU_SECTIONS = [
       {
         key: 'support',
         title: 'Support',
-        path: '#',
+        href: '/',
         icon: LifeBuoy,
         size: 'sm',
       },

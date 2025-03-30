@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { ChevronRight } from 'lucide-react';
-import { isEmpty } from 'ramda';
-import { Link } from 'react-router-dom';
+import { any, isEmpty } from 'ramda';
+import { Link, useLocation } from 'react-router-dom';
 
 import {
   Collapsible,
@@ -18,32 +18,66 @@ import {
 } from '@base/sidebar';
 import { renderIcon } from '@lib/utils';
 
-import { MenuItemProps } from './types';
+import { LinkComponentProps, MenuItemProps } from './types';
 
-export const MenuItem = ({
+const LinkComponent = ({
+  to,
+  href,
   children,
-  size,
-  icon,
-  title,
-  path,
-  isActive,
-}: MenuItemProps) => {
+  ...otherProps
+}: LinkComponentProps) => {
+  if (to)
+    return (
+      <Link {...otherProps} to={to}>
+        {children}
+      </Link>
+    );
+
+  if (href)
+    return (
+      <a {...otherProps} href={href} target="_blank">
+        {children}
+      </a>
+    );
+
+  return <span {...otherProps}>{children}</span>;
+};
+
+export const MenuItem = (props: MenuItemProps) => {
+  const { pathname } = useLocation();
+
+  const { children, size, icon, title, path, href } = props;
+
+  const isActive = props.isActive || pathname === path;
+
   if (!children || isEmpty(children))
     return (
-      <SidebarMenuButton size={size} asChild>
-        <a href={path}>
+      <SidebarMenuButton isActive={isActive} size={size} asChild>
+        <LinkComponent to={path} href={href}>
           {renderIcon(icon)}
           <span>{title}</span>
-        </a>
+        </LinkComponent>
       </SidebarMenuButton>
     );
 
+  const checkIsActive = (item: MenuItemProps): boolean =>
+    item.isActive || pathname === item.path;
+
+  const checkIsCollapsed = (item: MenuItemProps): boolean => {
+    if (!item.children?.length) return checkIsActive(item);
+    else return any((item) => !!item && checkIsCollapsed(item), item.children);
+  };
+
   return (
-    <Collapsible asChild defaultOpen={isActive} className="group/collapsible">
+    <Collapsible
+      asChild
+      defaultOpen={checkIsCollapsed(props)}
+      className="group/collapsible"
+    >
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
-          <SidebarMenuButton size={size}>
-            {!!icon ? renderIcon(icon) : null}
+          <SidebarMenuButton isActive={checkIsActive(props)} size={size}>
+            {renderIcon(icon)}
             <span>{title}</span>
             <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
@@ -52,10 +86,10 @@ export const MenuItem = ({
           <SidebarMenuSub>
             {children?.map((subItem) => (
               <SidebarMenuSubItem key={subItem.key}>
-                <SidebarMenuSubButton asChild>
-                  <Link to={subItem.path}>
+                <SidebarMenuSubButton isActive={checkIsActive(subItem)} asChild>
+                  <LinkComponent to={subItem.path} href={subItem.href}>
                     <span>{subItem.title}</span>
-                  </Link>
+                  </LinkComponent>
                 </SidebarMenuSubButton>
               </SidebarMenuSubItem>
             ))}

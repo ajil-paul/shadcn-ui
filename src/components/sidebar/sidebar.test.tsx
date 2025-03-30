@@ -4,6 +4,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { SidebarOpen } from 'lucide-react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 
 import { Sidebar, SidebarProps } from './';
 
@@ -40,7 +41,11 @@ describe('Sidebar Component', () => {
   });
 
   it('renders correctly with default props', async () => {
-    render(<Sidebar {...defaultProps} defaultOpen />);
+    render(
+      <MemoryRouter>
+        <Sidebar {...defaultProps} defaultOpen />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText('Test Header')).toBeInTheDocument();
     expect(screen.getByText('Section 1')).toBeInTheDocument();
@@ -48,7 +53,11 @@ describe('Sidebar Component', () => {
   });
 
   it('toggles sidebar on button click', async () => {
-    render(<Sidebar {...defaultProps} />);
+    render(
+      <MemoryRouter>
+        <Sidebar {...defaultProps} />
+      </MemoryRouter>
+    );
     const toggleButton = screen.getByTestId('toggle-sidebar');
     await userEvent.click(toggleButton);
     waitFor(() =>
@@ -57,7 +66,11 @@ describe('Sidebar Component', () => {
   });
 
   it('renders collapsed when defaultOpen is false', () => {
-    render(<Sidebar {...defaultProps} defaultOpen={false} />);
+    render(
+      <MemoryRouter>
+        <Sidebar {...defaultProps} defaultOpen={false} />
+      </MemoryRouter>
+    );
     waitFor(() =>
       expect(screen.queryByText('Section 1')).not.toBeInTheDocument()
     );
@@ -75,18 +88,24 @@ describe('Sidebar Component', () => {
       dispatchEvent: vi.fn(),
     }));
 
-    render(<Sidebar {...defaultProps} />);
+    render(
+      <MemoryRouter>
+        <Sidebar {...defaultProps} />
+      </MemoryRouter>
+    );
     const toggleButton = screen.getByTestId('toggle-sidebar');
     expect(toggleButton).toBeInTheDocument();
   });
 
   it('renders sidebar with custom className', () => {
     render(
-      <Sidebar
-        {...defaultProps}
-        className="custom-class"
-        data-testid="sidebar-wrapper"
-      />
+      <MemoryRouter>
+        <Sidebar
+          {...defaultProps}
+          className="custom-class"
+          data-testid="sidebar-wrapper"
+        />
+      </MemoryRouter>
     );
     expect(screen.getByTestId('sidebar-wrapper')).toHaveClass('custom-class');
   });
@@ -94,10 +113,12 @@ describe('Sidebar Component', () => {
   it('renders different variants correctly', () => {
     ['inset', 'sidebar', 'floating'].forEach((variant) => {
       render(
-        <Sidebar
-          {...defaultProps}
-          variant={variant as SidebarProps['variant']}
-        />
+        <MemoryRouter>
+          <Sidebar
+            {...defaultProps}
+            variant={variant as SidebarProps['variant']}
+          />
+        </MemoryRouter>
       );
       waitFor(() =>
         expect(screen.getByText('Test Header')).toBeInTheDocument()
@@ -106,7 +127,11 @@ describe('Sidebar Component', () => {
   });
 
   it('renders menu items with icons', () => {
-    render(<Sidebar {...defaultProps} />);
+    render(
+      <MemoryRouter>
+        <Sidebar {...defaultProps} />
+      </MemoryRouter>
+    );
     waitFor(() =>
       expect(screen.getByTestId('sidebar-icon-item1')).toBeInTheDocument()
     );
@@ -133,7 +158,11 @@ describe('Sidebar Component', () => {
       ],
     };
 
-    render(<Sidebar {...nestedProps} />);
+    render(
+      <MemoryRouter>
+        <Sidebar {...nestedProps} />
+      </MemoryRouter>
+    );
     waitFor(() => expect(screen.getByText('Item 1')).toBeInTheDocument());
     waitFor(() => expect(screen.getByText('Sub Item 1')).toBeInTheDocument());
   });

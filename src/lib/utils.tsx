@@ -32,4 +32,25 @@ const renderLabel = (label: string | React.ReactNode) => {
   return label;
 };
 
-export { renderIcon, renderLabel };
+const humanize = (str: string) => {
+  if (!str) return '';
+
+  let result = str
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // e.g., "firstName" -> "first Name"
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2') // e.g., "ABSStatus" -> "ABS Status"
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2'); // e.g., "SBSEnabled" -> "SBS Enabled"
+
+  return result
+    .split(' ')
+    .map(
+      (word, index) =>
+        /^[A-Z]+$/.test(word) // Check if the word is a full abbreviation
+          ? word // Keep abbreviations as they are
+          : index === 0
+            ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() // Capitalize the first word
+            : word.toLowerCase() // Convert other words to lowercase
+    )
+    .join(' ');
+};
+
+export { renderIcon, renderLabel, humanize };

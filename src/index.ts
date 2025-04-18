@@ -1,15 +1,17 @@
 export * from './components/alert';
+export * from './components/breadcrumb';
 export * from './components/button';
 export * from './components/checkbox';
+export * from './components/dropdown';
 export * from './components/input';
 export * from './components/label';
 export * from './components/radio-group';
 export * from './components/select';
+export * from './components/sidebar';
 export * from './components/switch';
+export * from './components/table';
 export * from './components/textarea';
 export * from './components/typography';
-export * from './components/dropdown';
-export * from './components/sidebar';
 
 export * from './components/form';
 

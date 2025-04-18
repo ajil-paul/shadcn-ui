@@ -94,7 +94,7 @@ export const Sidebar = ({
         />
       </ShadUISidebar>
       {sidebarContext.isMobile && !sidebarContext.open && (
-        <div className="p-2">
+        <div className="absolute p-2">
           <Button
             icon={
               <SidebarOpen

@@ -17,3 +17,6 @@ export * from './lib/hooks/useForm';
 export * from './lib/hooks/useFormIds';
 export * from './lib/hooks/useId';
 export * from './lib/hooks/useLocalStorage';
+export * from './lib/hooks/use-table';
+
+export { humanize } from './lib/utils';

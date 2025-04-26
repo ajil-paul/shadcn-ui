@@ -28,13 +28,17 @@ export const useTable = <TData, TValue>({
   tableKey,
   rowSelection,
   columnFilters,
+  totalCount,
   pagination,
-  enableRowSelection = true,
-  enableParams = false,
+  manualPagination = false,
   manualSorting = false,
-  setRowSelection,
-  setSorting,
-  setColumnFilters,
+  enableRowSelection = true,
+  enableSortParams = false,
+  enablePageParams = false,
+  onRowSelectionChange,
+  onSortingChange,
+  onColumnFiltersChange,
+  onPaginationChange,
   ...otherProps
 }: useTableProps<TData, TValue>) => {
   const navigate = useNavigate();
@@ -46,8 +50,6 @@ export const useTable = <TData, TValue>({
     {}
   );
   const urlSearchParams = useMemo(() => new URLSearchParams(search), [search]);
-
-  console.log(search);
 
   const columnData: ColumnDef<any, any>[] = useMemo(() => {
     if (enableRowSelection) {
@@ -85,68 +87,65 @@ export const useTable = <TData, TValue>({
   }, [columns, enableRowSelection]);
 
   const paginationProps = useMemo(() => {
+    if (!enablePageParams) return pagination;
+
     return {
-      pageIndex: enableParams
-        ? Number(Number(urlSearchParams.get('pageIndex'))) || 0
-        : pagination?.pageIndex || 0,
-      pageSize: enableParams
-        ? Number(urlSearchParams.get('pageSize')) || pagination?.pageSize || 10
-        : pagination?.pageSize || 10,
+      pageIndex: Number(Number(urlSearchParams.get('pageIndex'))) || 0,
+      pageSize:
+        Number(urlSearchParams.get('pageSize')) || pagination?.pageSize || 10,
     };
-  }, [search, pagination?.pageIndex, pagination?.pageSize, enableParams]);
+  }, [search, pagination?.pageIndex, pagination?.pageSize, enablePageParams]);
 
   const sortingProps = useMemo(() => {
-    if (enableParams) {
+    if (enableSortParams) {
       const orderBy = urlSearchParams.get('orderBy');
       const order = urlSearchParams.get('order') || 'asc';
       return orderBy ? [{ id: orderBy, desc: order === 'desc' }] : sorting;
     }
     return sorting;
-  }, [search, sorting, enableParams]);
+  }, [search, sorting, enableSortParams]);
 
   const handlePagination: OnChangeFn<PaginationState> = (updaterOrValue) => {
     const newState =
       typeof updaterOrValue === 'function'
         ? updaterOrValue(table.getState().pagination)
         : updaterOrValue;
-    if (enableParams) {
+    if (enablePageParams) {
       const newSearch = new URLSearchParams(search);
       newSearch.set('pageIndex', newState.pageIndex.toString());
       newSearch.set('pageSize', newState.pageSize.toString());
       navigate(`${pathname}?${newSearch.toString()}`);
-    } else pagination?.onChange?.(newState);
+    } else onPaginationChange?.(newState);
   };
 
   const handleSorting: OnChangeFn<SortingState> = (updater) => {
     const updatedSorting =
       typeof updater === 'function' ? updater([]) : updater;
-
-    if (enableParams && updatedSorting.length > 0) {
+    if (enableSortParams && updatedSorting.length > 0) {
       const newSearch = new URLSearchParams(search);
+      newSearch.delete('pageIndex');
+      newSearch.delete('pageSize');
       newSearch.set('orderBy', updatedSorting[0]?.id);
       newSearch.set('order', updatedSorting[0]?.desc ? 'desc' : 'asc');
       navigate(`${pathname}?${newSearch.toString()}`);
-    } else setSorting?.(updatedSorting);
+    } else onSortingChange?.(updatedSorting);
   };
 
   const table = useReactTable({
     data,
     columns: columnData as ColumnDef<unknown, any>[],
     state: {
-      sorting: sortingProps,
       columnVisibility,
       rowSelection,
       columnFilters,
+      sorting: sortingProps,
       pagination: paginationProps,
     },
+    autoResetPageIndex: false,
     manualSorting,
-    rowCount: pagination?.totalCount,
-    manualPagination: pagination?.manualPagination,
+    manualPagination,
+    rowCount: totalCount || data.length,
     enableRowSelection,
-    onPaginationChange: handlePagination,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange: handleSorting,
-    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -154,6 +153,10 @@ export const useTable = <TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    onRowSelectionChange: onRowSelectionChange,
+    onColumnFiltersChange: onColumnFiltersChange,
+    onPaginationChange: handlePagination,
+    onSortingChange: handleSorting,
     ...otherProps,
   });
 

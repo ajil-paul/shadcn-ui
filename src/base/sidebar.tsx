@@ -19,9 +19,11 @@ export const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 
 type SidebarContext = {
   state: 'expanded' | 'collapsed';
-  open: boolean;
-  setOpen: (open: boolean) => void;
   isMobile: boolean;
+  open: boolean;
+  mobileOpen: boolean;
+  setOpen: (open: boolean) => void;
+  setMobileOpen: (open: boolean) => void;
   toggleSidebar: () => void;
 };
 
@@ -29,11 +31,15 @@ const SidebarContext = React.createContext<SidebarContext | null>(null);
 
 const useSidebar = ({
   defaultOpen = true,
+  defaultMobileOpen = false,
   open: openProp,
+  mobileOpen: mobileOpenProp,
   onOpenChange: setOpenProp,
 }: {
   defaultOpen?: boolean;
+  defaultMobileOpen?: boolean;
   open?: boolean;
+  mobileOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) => {
   const isMobile = useIsMobile();
@@ -41,7 +47,10 @@ const useSidebar = ({
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
   const [_open, _setOpen] = React.useState(defaultOpen);
+  const [_mobileOpen, _setMobileOpen] = React.useState(defaultMobileOpen);
   const open = openProp ?? _open;
+  const mobileOpen = mobileOpenProp ?? _mobileOpen;
+
   const setOpen = React.useCallback(
     (value: boolean | ((value: boolean) => boolean)) => {
       const openState = typeof value === 'function' ? value(open) : value;
@@ -50,17 +59,26 @@ const useSidebar = ({
       } else {
         _setOpen(openState);
       }
-
-      // This sets the cookie to keep the sidebar state.
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
     [setOpenProp, open]
   );
 
+  const setMobileOpen = React.useCallback(
+    (value: boolean | ((value: boolean) => boolean)) => {
+      const openState = typeof value === 'function' ? value(mobileOpen) : value;
+      if (setOpenProp) {
+        setOpenProp(openState);
+      } else {
+        _setMobileOpen(openState);
+      }
+    },
+    [setOpenProp, mobileOpen]
+  );
+
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
-    return setOpen((open) => !open);
-  }, [isMobile, setOpen]);
+    return isMobile ? setMobileOpen((open) => !open) : setOpen((open) => !open);
+  }, [isMobile, setOpen, setMobileOpen]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
@@ -85,12 +103,14 @@ const useSidebar = ({
   const contextValue = React.useMemo<SidebarContext>(
     () => ({
       state,
-      open,
-      setOpen,
       isMobile,
+      open,
+      mobileOpen,
+      setOpen,
+      setMobileOpen,
       toggleSidebar,
     }),
-    [state, open, setOpen, isMobile, toggleSidebar]
+    [state, open, mobileOpen, setOpen, setMobileOpen, isMobile, toggleSidebar]
   );
 
   return contextValue;
@@ -104,8 +124,8 @@ const Sidebar = React.forwardRef<
     collapsible?: 'offcanvas' | 'icon' | 'none';
     isMobile?: boolean;
     state?: 'expanded' | 'collapsed';
-    open?: boolean;
-    setOpen?: (open: boolean) => void;
+    mobileOpen?: boolean;
+    setMobileOpen?: (open: boolean) => void;
   }
 >(
   (
@@ -117,8 +137,8 @@ const Sidebar = React.forwardRef<
       children,
       isMobile,
       state,
-      open,
-      setOpen,
+      mobileOpen,
+      setMobileOpen,
       ...props
     },
     ref
@@ -140,7 +160,7 @@ const Sidebar = React.forwardRef<
 
     if (isMobile) {
       return (
-        <Sheet open={open} onOpenChange={setOpen} {...props}>
+        <Sheet open={mobileOpen} onOpenChange={setMobileOpen} {...props}>
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"

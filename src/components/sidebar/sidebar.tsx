@@ -28,9 +28,10 @@ export const Sidebar = ({
   style,
   className,
   defaultOpen = true,
+  defaultMobileOpen = false,
   ...props
 }: SidebarProps) => {
-  const sidebarContext = useSidebar({ defaultOpen });
+  const sidebarContext = useSidebar({ defaultOpen, defaultMobileOpen });
 
   return (
     <div
@@ -90,11 +91,11 @@ export const Sidebar = ({
           }
           variant={sidebarContext.isMobile ? 'secondary' : 'ghost'}
           onClick={sidebarContext.toggleSidebar}
-          className="absolute px-2 top-2 -right-12"
+          className="absolute px-2 top-4 -right-12"
         />
       </ShadUISidebar>
-      {sidebarContext.isMobile && !sidebarContext.open && (
-        <div className="absolute p-2">
+      {sidebarContext.isMobile && !sidebarContext.mobileOpen && (
+        <div className="absolute p-2 pt-4">
           <Button
             icon={
               <SidebarOpen

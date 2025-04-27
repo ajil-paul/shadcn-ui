@@ -5,7 +5,6 @@ import {
   PaginationState,
   RowSelectionState,
   SortingState,
-  Updater,
 } from '@tanstack/react-table';
 
 export interface useTableProps<TData, TValue> {
@@ -27,18 +26,15 @@ export interface useTableProps<TData, TValue> {
   tableKey?: string;
   rowSelection?: RowSelectionState;
   columnFilters?: ColumnFiltersState;
-  enableParams?: boolean;
+  enablePageParams?: boolean;
+  enableSortParams?: boolean;
   manualSorting?: boolean;
-  pagination?: {
-    pageSize?: number;
-    pageIndex?: number;
-    totalCount: number;
-    sizeOptions?: number[];
-    manualPagination?: boolean;
-    onChange?: (updater: Updater<PaginationState>) => void;
-  };
+  manualPagination?: boolean;
+  pagination?: PaginationState;
+  totalCount?: number;
   enableRowSelection?: boolean;
-  setRowSelection?: OnChangeFn<RowSelectionState>;
-  setSorting?: OnChangeFn<SortingState>;
-  setColumnFilters?: OnChangeFn<ColumnFiltersState>;
+  onRowSelectionChange?: OnChangeFn<RowSelectionState>;
+  onSortingChange?: OnChangeFn<SortingState>;
+  onPaginationChange?: OnChangeFn<PaginationState>;
+  onColumnFiltersChange?: OnChangeFn<ColumnFiltersState>;
 }

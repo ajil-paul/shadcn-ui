@@ -36,13 +36,7 @@ export const ViewOptions = <TData,>({ table }: ViewOptionsProps<TData>) => {
           })),
       ]}
     >
-      <Button
-        variant="outline"
-        size="sm"
-        className="h-8 ml-auto lg:flex"
-        icon={Settings2}
-        label="View"
-      />
+      <Button variant="outline" size="sm" icon={Settings2} label="View" />
     </Dropdown>
   );
 };

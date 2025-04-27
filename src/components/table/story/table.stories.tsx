@@ -37,16 +37,16 @@ export const Default = (args: TableProps) => {
 
   const table = useTable({
     data: TASKS,
+    totalCount: TASKS.length,
     columns,
-    pagination: { totalCount: TASKS.length },
     rowSelection,
-    enableParams: true,
+    enablePageParams: true,
+    enableSortParams: true,
     enableRowSelection: true,
+    // autoResetPageIndex: false,
     setRowSelection: setRowSelection,
     setColumnFilters: () => {},
   });
-
-  console.log({ rowSelection });
 
   return (
     <div className="flex flex-col w-full p-2 space-y-2">
@@ -188,7 +188,7 @@ ${stringifyArrayOfObjects(TASKS.slice(0, 20), 4)}
       totalCount: tasks.length,
     },
     rowSelection,
-    enableParams: true,
+    enablePageParams: true,
     enableRowSelection: true,
     setRowSelection: setRowSelection,
     setColumnFilters: () => {},

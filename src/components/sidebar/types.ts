@@ -75,6 +75,11 @@ export interface SidebarProps extends React.ComponentProps<typeof Sidebar> {
   defaultOpen?: boolean;
 
   /**
+   * Indicates whether the sidebar should be open by default in mobile view.
+   */
+  defaultMobileOpen?: boolean;
+
+  /**
    * The variant of the sidebar.
    * Can be "inset", "sidebar", or "floating".
    */

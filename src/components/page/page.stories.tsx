@@ -3,7 +3,7 @@ import React from 'react';
 import type { Meta } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'Page',
+  title: 'Examples/Page',
   tags: ['autodocs'],
 };
 

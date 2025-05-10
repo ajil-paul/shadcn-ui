@@ -6,7 +6,7 @@ import { Alert, AlertProps, showAlert } from '../alert';
 import { Button } from '../button/button';
 
 const meta: Meta<typeof Alert> = {
-  title: 'Components/Alert',
+  title: 'Overlays/Alert',
   component: Alert,
   tags: ['autodocs'],
 };

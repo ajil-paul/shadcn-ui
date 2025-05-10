@@ -5,6 +5,7 @@ export * from './components/checkbox';
 export * from './components/dropdown';
 export * from './components/input';
 export * from './components/label';
+export * from './components/modal';
 export * from './components/pane';
 export * from './components/radio-group';
 export * from './components/select';

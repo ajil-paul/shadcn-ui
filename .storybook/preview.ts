@@ -5,6 +5,11 @@ import { themes } from '@storybook/theming';
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Components', 'Overlays', 'Form Components', 'Examples'],
+      },
+    },
     darkMode: {
       dark: {
         ...themes.dark,

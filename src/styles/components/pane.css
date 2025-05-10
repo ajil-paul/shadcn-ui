@@ -1,0 +1,22 @@
+.shadcn-pane-content-wrapper {
+  @apply flex flex-col h-screen p-0;
+}
+
+.shadcn-pane-header--wrapper {
+  @apply flex p-6 pb-3;
+}
+
+.shadcn-pane-header--wrapper .shadcn-pane-header-description {
+  margin-top: 0 !important;
+}
+
+.shadcn-pane-body--wrapper {
+  @apply p-6 pt-3 overflow-y-auto;
+}
+
+.shadcn-pane-footer--wrapper {
+  @apply flex p-6 pt-4 mt-auto border-t sm:justify-start !important;
+  box-shadow:
+    0 -1px 3px 0px rgb(0 0 0 / 0.1),
+    0 -1px 2px -1px rgb(0 0 0 / 0.1);
+}

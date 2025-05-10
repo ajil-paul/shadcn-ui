@@ -5,11 +5,14 @@ export * from './components/checkbox';
 export * from './components/dropdown';
 export * from './components/input';
 export * from './components/label';
+export * from './components/pane';
 export * from './components/radio-group';
 export * from './components/select';
 export * from './components/sidebar';
+export * from './components/spinner';
 export * from './components/switch';
 export * from './components/table';
+export * from './components/tag';
 export * from './components/textarea';
 export * from './components/typography';
 

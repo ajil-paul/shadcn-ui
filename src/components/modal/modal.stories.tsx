@@ -2,24 +2,24 @@ import React from 'react';
 
 import type { Meta } from '@storybook/react';
 
-import { PaneProps } from './types';
+import { ModalProps } from './types';
 import { Button } from '../button';
 import { Input } from '../input';
 
-import { Pane } from '.';
+import { Modal } from '.';
 
-const { Header, Body, Footer } = Pane;
+const { Header, Body, Footer } = Modal;
 
-const meta: Meta<PaneProps> = {
-  title: 'Overlays/Pane',
-  component: Pane,
+const meta: Meta<ModalProps> = {
+  title: 'Overlays/Modal',
+  component: Modal,
   tags: ['autodocs'],
 };
 
 export default meta;
 
-export const Default = (args: PaneProps) => (
-  <Pane {...args}>
+export const Default = (args: ModalProps) => (
+  <Modal {...args}>
     <Header
       title="Edit user"
       description="Update the details of the user here."
@@ -31,17 +31,17 @@ export const Default = (args: PaneProps) => (
       <Button label="Save changes" />
       <Button variant="ghost" label="Cancel" />
     </Footer>
-  </Pane>
+  </Modal>
 );
 
 Default.args = {
   size: 'sm',
-  trigger: <Button label="Open pane" />,
+  trigger: <Button label="Open modal" />,
 };
 
 export const Sizes = () => (
   <div className="space-x-4">
-    <Pane trigger={<Button label="Small" />} size="sm">
+    <Modal trigger={<Button label="Small" />} size="sm">
       <Header
         title="Edit user"
         description="Update the details of the user here."
@@ -53,8 +53,8 @@ export const Sizes = () => (
         <Button label="Save changes" />
         <Button variant="ghost" label="Cancel" />
       </Footer>
-    </Pane>
-    <Pane trigger={<Button label="Medium" />} size="md">
+    </Modal>
+    <Modal trigger={<Button label="Medium" />} size="md">
       <Header
         title="Edit user"
         description="Update the details of the user here."
@@ -66,8 +66,8 @@ export const Sizes = () => (
         <Button label="Save changes" />
         <Button variant="ghost" label="Cancel" />
       </Footer>
-    </Pane>
-    <Pane trigger={<Button label="Large" />} size="lg">
+    </Modal>
+    <Modal trigger={<Button label="Large" />} size="lg">
       <Header
         title="Edit user"
         description="Update the details of the user here."
@@ -79,6 +79,6 @@ export const Sizes = () => (
         <Button label="Save changes" />
         <Button variant="ghost" label="Cancel" />
       </Footer>
-    </Pane>
+    </Modal>
   </div>
 );

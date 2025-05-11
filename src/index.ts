@@ -15,6 +15,7 @@ export * from './components/switch';
 export * from './components/table';
 export * from './components/tag';
 export * from './components/textarea';
+export * from './components/toaster';
 export * from './components/typography';
 
 export * from './components/form';

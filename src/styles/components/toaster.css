@@ -1,0 +1,23 @@
+[data-rich-colors='true'][data-sonner-toast][data-type='success']
+  [data-close-button]:hover {
+  background-color: var(--success-bg) !important;
+  border-color: var(--success-border) !important;
+}
+
+[data-rich-colors='true'][data-sonner-toast][data-type='error']
+  [data-close-button]:hover {
+  background-color: var(--error-bg) !important;
+  border-color: var(--error-border) !important;
+}
+
+[data-rich-colors='true'][data-sonner-toast][data-type='info']
+  [data-close-button]:hover {
+  background-color: var(--info-bg) !important;
+  border-color: var(--info-border) !important;
+}
+
+[data-rich-colors='true'][data-sonner-toast][data-type='warning']
+  [data-close-button]:hover {
+  background-color: var(--warning-bg) !important;
+  border-color: var(--warning-border) !important;
+}

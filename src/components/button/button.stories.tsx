@@ -21,7 +21,7 @@ export const Default = (args: ButtonProps) => (
 );
 
 export const Styles = (args: ButtonProps) => (
-  <div className="flex w-full gap-3">
+  <div className="flex items-center w-full gap-3">
     <Button {...args} label="Default" variant="default" />
     <Button {...args} label="Secondary" variant="secondary" />
     <Button {...args} label="Destructive" variant="destructive" />
@@ -32,7 +32,7 @@ export const Styles = (args: ButtonProps) => (
 );
 
 export const Sizes = (args: ButtonProps) => (
-  <div className="flex w-full gap-3">
+  <div className="flex items-center w-full gap-3">
     <Button {...args} label="Small" size="sm" />
     <Button {...args} label="Medium" size="default" />
     <Button {...args} label="Large" size="lg" />
@@ -47,9 +47,9 @@ export const Link = (args: ButtonProps) => (
 
 export const IconButton = (args: ButtonProps) => (
   <BrowserRouter>
-    <div className="flex w-full gap-3">
+    <div className="flex items-start w-full gap-3">
       <Button {...args} icon={Sparkle} label="Default" />
-      <Button {...args} icon={<Sparkle size={16} />} />
+      <Button {...args} size="icon" icon={<Sparkle size={16} />} />
     </div>
   </BrowserRouter>
 );

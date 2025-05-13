@@ -32,7 +32,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ref={ref}
             className={buttonClassName}
             disabled={loading || disabled}
-            variant={otherProps.variant || 'link'}
+            variant={otherProps.variant || 'default'}
             {...otherProps}
           >
             {loading

@@ -42,7 +42,7 @@ export const Types = () => (
         The king thought long and hard, and finally came up with{' '}
         <a
           href="#"
-          className="font-medium underline text-primary underline-offset-4"
+          className="font-medium text-indigo-500 underline underline-offset-4"
         >
           a brilliant plan
         </a>

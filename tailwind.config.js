@@ -4,6 +4,10 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}', './.storybook/preview.ts'],
   safelist: ['dark'],
   theme: {
+    fontFamily: {
+      sans: ['Geist', 'sans-serif'],
+      mono: ['Geist Mono', 'monospace'],
+    },
     container: {
       center: 'true',
       padding: '2rem',

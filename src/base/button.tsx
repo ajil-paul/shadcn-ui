@@ -22,10 +22,10 @@ const buttonVariants = cva(
         link: 'text-primary shad-ui-button--link',
       },
       size: {
-        default: 'h-9 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-10 rounded-md px-8',
-        icon: 'h-9 w-9',
+        default: 'rounded-md px-3 py-1',
+        sm: 'rounded-md px-2 text-xs py-1',
+        lg: 'rounded-md text-md px-3 py-1',
+        icon: 'p-1.5',
       },
     },
     defaultVariants: {
@@ -44,10 +44,11 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
+    console.log(buttonVariants({ variant, size }));
     return (
       <Comp
         ref={ref}
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size }), className)}
         {...props}
       />
     );

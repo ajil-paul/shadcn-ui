@@ -63,7 +63,6 @@ type NavView = 'days' | 'years';
 function Calendar({
   className,
   showOutsideDays = true,
-  showYearSwitcher = true,
   yearRange = 12,
   numberOfMonths,
   ...props
@@ -129,7 +128,7 @@ function Calendar({
   );
   const _dayButtonClassName = cn(
     buttonVariants({ variant: 'ghost' }),
-    'size-8 rounded-md p-0 text-sm font-normal transition-none aria-selected:opacity-100',
+    'size-8 rounded-md p-0 text-sm justify-center font-normal transition-none aria-selected:opacity-100',
     props.dayButtonClassName
   );
   const buttonRangeClassName =
@@ -216,7 +215,6 @@ function Calendar({
         ),
         CaptionLabel: (props) => (
           <CaptionLabel
-            showYearSwitcher={showYearSwitcher}
             navView={navView}
             setNavView={setNavView}
             displayYears={displayYears}
@@ -345,7 +343,8 @@ function Nav({
     <nav className={cn('flex items-center', className)}>
       <Button
         variant="outline"
-        className="absolute left-0 p-0 bg-transparent h-7 w-7 opacity-80 hover:opacity-100"
+        className="absolute left-0 p-0 opacity-80 hover:opacity-100"
+        size="icon"
         type="button"
         tabIndex={isPreviousDisabled ? undefined : -1}
         disabled={isPreviousDisabled}
@@ -363,7 +362,8 @@ function Nav({
 
       <Button
         variant="outline"
-        className="absolute right-0 p-0 bg-transparent h-7 w-7 opacity-80 hover:opacity-100"
+        className="absolute right-0 p-0 opacity-80 hover:opacity-100"
+        size="icon"
         type="button"
         tabIndex={isNextDisabled ? undefined : -1}
         disabled={isNextDisabled}
@@ -382,23 +382,18 @@ function Nav({
 
 function CaptionLabel({
   children,
-  showYearSwitcher,
   navView,
   setNavView,
   displayYears,
-  ...props
 }: {
-  showYearSwitcher?: boolean;
   navView: NavView;
   setNavView: React.Dispatch<React.SetStateAction<NavView>>;
   displayYears: { from: number; to: number };
 } & React.HTMLAttributes<HTMLSpanElement>) {
-  if (!showYearSwitcher) return <span {...props}>{children}</span>;
   return (
     <Button
-      className="w-full text-sm font-medium truncate h-7"
+      className="justify-center w-full font-medium truncate h-7"
       variant="ghost"
-      size="sm"
       onClick={() => setNavView((prev) => (prev === 'days' ? 'years' : 'days'))}
     >
       {navView === 'days'

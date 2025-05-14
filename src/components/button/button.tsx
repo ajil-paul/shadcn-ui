@@ -13,6 +13,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     {
       loading = false,
       disabled = false,
+      className,
       label,
       to,
       icon,
@@ -21,9 +22,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const buttonClassName = cn(otherProps.className, {
-      'flex-row-reverse': iconPosition === 'right',
-    });
+    const buttonClassName = cn(
+      className,
+      iconPosition === 'right' && 'flex-row-reverse justify-between'
+    );
 
     if (to)
       return (

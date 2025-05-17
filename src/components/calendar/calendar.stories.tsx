@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DateRange } from 'react-day-picker';
+
 import type { Meta } from '@storybook/react';
 
 import { Calendar } from '.';
@@ -29,4 +31,54 @@ export const Default = (args: typeof Calendar) => {
 
 Default.args = {
   yearRange: 20,
+};
+
+export const Multiple = (args: typeof Calendar) => {
+  const [dates, setDates] = React.useState<Date[] | undefined>([]);
+
+  return (
+    <div>
+      <Calendar
+        {...args}
+        defaultMonth={dates?.[0]}
+        selected={dates}
+        onSelect={setDates}
+        className="border rounded-lg"
+      />
+      <div className="mt-6 text-sm">
+        Selected dates:{' '}
+        {dates?.map((date) => date.toLocaleDateString()).join(', ')}
+      </div>
+    </div>
+  );
+};
+
+Multiple.args = {
+  yearRange: 20,
+  mode: 'multiple',
+};
+
+export const Range = (args: typeof Calendar) => {
+  const [dates, setDates] = React.useState<DateRange | undefined>();
+
+  return (
+    <div>
+      <Calendar
+        {...args}
+        defaultMonth={dates?.[0]}
+        selected={dates}
+        onSelect={setDates}
+        className="border rounded-lg"
+      />
+      <div className="mt-6 text-sm">
+        <div>From: {dates?.from?.toLocaleDateString()}</div>
+        <div>To: {dates?.to?.toLocaleDateString()}</div>
+      </div>
+    </div>
+  );
+};
+
+Range.args = {
+  yearRange: 20,
+  mode: 'range',
 };

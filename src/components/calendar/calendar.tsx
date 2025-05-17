@@ -167,6 +167,7 @@ function Calendar({
 
   return (
     <DayPicker
+      data-testid="calendar-container"
       showOutsideDays={showOutsideDays}
       className={cn('p-3', className)}
       style={{

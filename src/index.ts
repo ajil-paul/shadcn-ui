@@ -3,6 +3,7 @@ export * from './components/breadcrumb';
 export * from './components/button';
 export * from './components/calendar';
 export * from './components/checkbox';
+export * from './components/date-picker';
 export * from './components/dropdown';
 export * from './components/input';
 export * from './components/label';

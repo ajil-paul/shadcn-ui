@@ -59,49 +59,54 @@ export const Pagination = <TData,>({
           />
         </div>
       )}
-      <nav
-        aria-label="Pagination"
-        className="inline-flex -space-x-px rounded-md shadow-sm h-9"
-      >
-        <Button
-          variant="outline"
-          className="h-full p-0 rounded-r-none w-9"
-          data-testid="previous-button"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-          icon={ChevronLeft}
-          label={<span className="sr-only">Go to previous page</span>}
-        />
 
-        {pages.map((page, index) => (
-          <button
-            key={index}
-            onClick={() => typeof page === 'number' && table.setPageIndex(page)}
-            aria-current={pageIndex === page ? 'page' : undefined}
-            disabled={page === '...'}
-            className={cn({
-              'relative h-full flex items-center px-4 py-2 text-sm font-semibold border':
-                true,
-              'z-10 bg-primary text-primary-foreground border-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2':
-                pageIndex === page,
-              'text-foreground hover:bg-accent': pageIndex !== page,
-              'cursor-default': page === '...',
-            })}
-          >
-            {typeof page === 'number' ? page + 1 : page}
-          </button>
-        ))}
+      {table.getFilteredRowModel().rows.length > pageSize && (
+        <nav
+          aria-label="Pagination"
+          className="inline-flex -space-x-px rounded-md shadow-sm h-9"
+        >
+          <Button
+            variant="outline"
+            className="justify-center h-full p-0 rounded-r-none w-9"
+            data-testid="previous-button"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            icon={ChevronLeft}
+            label={<span className="sr-only">Go to previous page</span>}
+          />
 
-        <Button
-          variant="outline"
-          className="h-full p-0 rounded-l-none w-9"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-          data-testid="next-button"
-          icon={ChevronRight}
-          label={<span className="sr-only">Go to next page</span>}
-        />
-      </nav>
+          {pages.map((page, index) => (
+            <button
+              key={index}
+              onClick={() =>
+                typeof page === 'number' && table.setPageIndex(page)
+              }
+              aria-current={pageIndex === page ? 'page' : undefined}
+              disabled={page === '...'}
+              className={cn({
+                'relative h-full flex items-center px-4 py-2 text-sm font-semibold border':
+                  true,
+                'z-10 bg-primary text-primary-foreground border-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2':
+                  pageIndex === page,
+                'text-foreground hover:bg-accent': pageIndex !== page,
+                'cursor-default': page === '...',
+              })}
+            >
+              {typeof page === 'number' ? page + 1 : page}
+            </button>
+          ))}
+
+          <Button
+            variant="outline"
+            className="justify-center h-full p-0 rounded-l-none w-9"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            data-testid="next-button"
+            icon={ChevronRight}
+            label={<span className="sr-only">Go to next page</span>}
+          />
+        </nav>
+      )}
     </div>
   );
 };

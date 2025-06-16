@@ -53,4 +53,22 @@ const humanize = (str: string) => {
     .join(' ');
 };
 
-export { renderIcon, renderLabel, humanize };
+const hyphenize = (input) => {
+  const fallbackString = 'nui';
+
+  if (typeof input === 'number') return String(input);
+
+  if (input && typeof input === 'string' && input.replace) {
+    return input
+      .replace(/[\s_]/g, '-')
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/-+/g, '-')
+      .toLowerCase();
+  }
+
+  return fallbackString;
+};
+
+const noop = () => {};
+
+export { renderIcon, renderLabel, humanize, hyphenize, noop };

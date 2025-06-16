@@ -220,7 +220,7 @@ describe('DatePicker', () => {
     const startDate = new Date(
       currentMonth.getFullYear(),
       currentMonth.getMonth(),
-      5
+      25
     );
     const startDateButton = await within(calendar).findByText(
       startDate.getDate().toString()
@@ -251,7 +251,7 @@ describe('DatePicker', () => {
     const endDate = new Date(
       currentMonth.getFullYear(),
       currentMonth.getMonth(),
-      25
+      29
     );
 
     const endDateButton = await within(calendar).findByText(

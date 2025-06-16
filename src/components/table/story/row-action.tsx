@@ -7,11 +7,13 @@ import { Button } from '@components/button';
 import { Dropdown } from '@components/dropdown';
 import { Row } from '@tanstack/react-table';
 
-interface RowActionsProps<TData> {
+interface RowActionsProps<TData extends { title: string }> {
   row: Row<TData>;
 }
 
-export function RowActions<TData>({ row }: RowActionsProps<TData>) {
+export function RowActions<TData extends { title: string }>({
+  row,
+}: RowActionsProps<TData>) {
   const handleDelete = () =>
     showAlert({
       title: 'Delete record?',

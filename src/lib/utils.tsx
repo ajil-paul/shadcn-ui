@@ -53,7 +53,7 @@ const humanize = (str: string) => {
     .join(' ');
 };
 
-const hyphenize = (input) => {
+const hyphenize = (input: string) => {
   const fallbackString = 'nui';
 
   if (typeof input === 'number') return String(input);

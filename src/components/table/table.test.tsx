@@ -2,62 +2,64 @@
 import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import { Table } from './table';
 import { Pagination } from './pagination';
 
-const createMockTable = (overrides = {}) => ({
-  getState: () => ({
-    pagination: {
-      pageIndex: 0,
-      pageSize: 10,
-    },
-  }),
-  getPageCount: () => 5,
-  getCanPreviousPage: () => true,
-  getCanNextPage: () => true,
-  previousPage: vi.fn(),
-  nextPage: vi.fn(),
-  setPageIndex: vi.fn(),
-  setPageSize: vi.fn(),
-  getAllColumns: vi.fn(() => [{ id: 'col1' }, { id: 'col2' }]),
-  getHeaderGroups: vi.fn(() => [
-    {
-      id: 'headerGroup1',
-      headers: [
-        {
-          id: 'col1',
-          isPlaceholder: false,
-          column: {
-            columnDef: {
-              header: () => 'Header 1',
-            },
-          },
-          getContext: vi.fn(() => ({})),
-        },
-      ],
-    },
-  ]),
-  getRowModel: vi.fn(() => ({
-    rows: [
-      {
-        id: 'row1',
+const createMockTable = (overrides = {}) => {
+  const rows = [
+    ...Array(25)
+      .fill(null)
+      .map((_el, index) => ({
+        id: `row${index}`,
         getIsSelected: () => false,
         getVisibleCells: () => [
           {
-            id: 'cell1',
-            column: { columnDef: { cell: () => 'Cell 1' } },
+            id: `cell${index}`,
+            column: { columnDef: { cell: () => `Cell ${index}` } },
+            getContext: vi.fn(() => ({})),
+          },
+        ],
+      })),
+  ];
+  return {
+    getState: () => ({
+      pagination: {
+        pageIndex: 0,
+        pageSize: 10,
+      },
+    }),
+    getPageCount: () => 5,
+    getCanPreviousPage: () => true,
+    getCanNextPage: () => true,
+    previousPage: vi.fn(),
+    nextPage: vi.fn(),
+    setPageIndex: vi.fn(),
+    setPageSize: vi.fn(),
+    getAllColumns: vi.fn(() => [{ id: 'col1' }, { id: 'col2' }]),
+    getHeaderGroups: vi.fn(() => [
+      {
+        id: 'headerGroup1',
+        headers: [
+          {
+            id: 'col1',
+            isPlaceholder: false,
+            column: {
+              columnDef: {
+                header: () => 'Header 1',
+              },
+            },
             getContext: vi.fn(() => ({})),
           },
         ],
       },
-    ],
-  })),
-  getFilteredSelectedRowModel: vi.fn(() => ({ rows: [] })),
-  getFilteredRowModel: vi.fn(() => ({ rows: [] })),
-  ...overrides,
-});
+    ]),
+    getRowModel: vi.fn(() => ({ rows })),
+    getFilteredSelectedRowModel: vi.fn(() => ({ rows: [] })),
+    getFilteredRowModel: vi.fn(() => ({ rows })),
+    ...overrides,
+  };
+};
 
 describe('Table', () => {
   let tableMock: ReturnType<typeof createMockTable>;
@@ -88,7 +90,7 @@ describe('Table', () => {
 
   it('renders pagination info', () => {
     render(<Table table={tableMock} sizeOptions={[10]} />);
-    expect(screen.getByText(/0 of 0 row\(s\) selected/i)).toBeInTheDocument();
+    expect(screen.getByText(/0 of 25 row\(s\) selected/i)).toBeInTheDocument();
   });
 });
 

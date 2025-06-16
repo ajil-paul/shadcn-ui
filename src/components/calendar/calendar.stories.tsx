@@ -21,7 +21,6 @@ export const Default = (args: typeof Calendar) => {
     <Calendar
       {...args}
       mode="single"
-      defaultMonth={date}
       selected={date}
       onSelect={setDate}
       className="border rounded-lg"
@@ -40,7 +39,6 @@ export const Multiple = (args: typeof Calendar) => {
     <div>
       <Calendar
         {...args}
-        defaultMonth={dates?.[0]}
         selected={dates}
         onSelect={setDates}
         className="border rounded-lg"
@@ -65,7 +63,6 @@ export const Range = (args: typeof Calendar) => {
     <div>
       <Calendar
         {...args}
-        defaultMonth={dates?.[0]}
         selected={dates}
         onSelect={setDates}
         className="border rounded-lg"

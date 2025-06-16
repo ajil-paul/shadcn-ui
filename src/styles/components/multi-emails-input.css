@@ -1,0 +1,16 @@
+.shad-ui-select-email__control .select__clear-indicator {
+  padding: 0 8px;
+}
+
+.shad-ui-select-email__control {
+  padding: 2px 0 !important;
+}
+
+.shad-ui-select__control
+  .select__value-container--has-value.select__value-container--is-multi {
+  padding: 0 2px;
+}
+
+.shad-ui-select__control .shad-ui-select__multi-value {
+  @apply rounded-md;
+}

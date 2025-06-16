@@ -113,7 +113,7 @@ describe('Calendar', () => {
 
   it('handles disabled dates', () => {
     const disabledDate = new Date(2024, 8, 18);
-    const { container } = render(
+    render(
       <Calendar
         defaultMonth={new Date(2024, 8, 24)}
         disabled={[disabledDate]}
@@ -125,7 +125,7 @@ describe('Calendar', () => {
 
   it('shows outside days when showOutsideDays is true', () => {
     const { container } = render(
-      <Calendar selected={new Date('2025-05-12')} showOutsideDays />
+      <Calendar selected={new Date(2025, 4, 12)} showOutsideDays />
     );
     const outsideDays = container.querySelectorAll('.day-outside');
 

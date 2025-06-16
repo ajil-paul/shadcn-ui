@@ -10,6 +10,7 @@ import {
   labelPrevious,
   useDayPicker,
   type DayPickerProps,
+  type DateRange,
 } from 'react-day-picker';
 
 import { Button, buttonVariants } from '@base/button';
@@ -27,6 +28,8 @@ export type CalendarProps = DayPickerProps & {
    * @default true
    */
   showYearSwitcher?: boolean;
+
+  selected?: Date | Date[] | DateRange;
 
   monthsClassName?: string;
   monthCaptionClassName?: string;
@@ -50,6 +53,7 @@ export type CalendarProps = DayPickerProps & {
   disabledClassName?: string;
   rangeMiddleClassName?: string;
   hiddenClassName?: string;
+  showOutsideDays?: boolean;
 };
 
 type NavView = 'days' | 'years';
@@ -165,6 +169,14 @@ function Calendar({
   );
   const _hiddenClassName = cn('invisible flex-1', props.hiddenClassName);
 
+  const newDefaultMonth =
+    props.defaultMonth ??
+    (Array.isArray(props.selected)
+      ? props.selected[0] || new Date()
+      : props.selected instanceof Date
+        ? props.selected
+        : props.selected?.from || new Date());
+
   return (
     <DayPicker
       data-testid="calendar-container"
@@ -237,6 +249,7 @@ function Calendar({
       }}
       numberOfMonths={columnsDisplayed}
       {...props}
+      defaultMonth={newDefaultMonth}
     />
   );
 }

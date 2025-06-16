@@ -257,18 +257,19 @@ const MultiEmailInput = forwardRef<any, MultiEmailInputProps>(
           }}
         />
         {!!error && (
-          <div>
+          <div className="inline-flex">
             <ErrorText id={id} text={error} />
             {isFilterEmailsLinkVisible && (
-              <span
-                className="font-semibold cursor-pointer"
+              <button
+                role="button"
+                className="text-xs font-bold leading-none text-destructive"
                 onClick={handleFilterEmails}
               >
                 &nbsp;
                 {filterInvalidEmails.label
                   ? filterInvalidEmails.label
                   : 'Click here to remove invalid emails.'}
-              </span>
+              </button>
             )}
           </div>
         )}

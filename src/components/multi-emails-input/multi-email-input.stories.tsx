@@ -41,6 +41,14 @@ export const Default: Story = {
 };
 
 export const WithError: Story = {
+  render: (args) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [emails, setEmails] = useState<EmailOption[]>([
+      { value: 'test.com', label: 'test.com' },
+    ]);
+
+    return <MultiEmailInput {...args} value={emails} onChange={setEmails} />;
+  },
   args: {
     ...defaultArgs,
     error: 'Please enter valid email addresses.',

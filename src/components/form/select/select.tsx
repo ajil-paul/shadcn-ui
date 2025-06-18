@@ -36,14 +36,7 @@ const FormSelect = forwardRef<any, FormSelectProps>((props, ref) => {
         )
         .filter(Boolean);
     }
-
-    // For single-select, if value is already an object, return it
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      return value;
-    }
-
-    // For single-select with primitive value, find the matching option
-    return options.filter((option) => getRealOptionValue(option) === value)[0];
+    return value;
   };
 
   const finalGetOptionValue = getOptionValue || ((option: any) => option.value);

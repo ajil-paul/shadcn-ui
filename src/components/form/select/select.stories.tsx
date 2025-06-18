@@ -31,7 +31,7 @@ export const Basic = () => {
     schema: Yup.object().shape({
       flavor: Yup.string().required('Please select a flavor'),
     }),
-    defaultValues: { flavor: '' },
+    defaultValues: { flavor: 'chocolate' },
   });
 
   return (
@@ -58,7 +58,7 @@ export const MultiSelect = () => {
         .min(1, 'Please select at least one flavor')
         .required('Please select flavors'),
     }),
-    defaultValues: { flavors: [] },
+    defaultValues: { flavors: ['chocolate', 'mint'] },
   });
 
   return (

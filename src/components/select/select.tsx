@@ -34,7 +34,7 @@ const Select = forwardRef<any, SelectProps>(
   (
     {
       options = [],
-      strategy = STRATEGIES.default,
+      strategy = STRATEGIES.fixed,
       helpText,
       error,
       label,

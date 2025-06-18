@@ -1,7 +1,7 @@
 import React from 'react';
 import { forwardRef } from 'react';
 
-import { assoc, flatten, pluck } from 'ramda';
+import { flatten, pluck } from 'ramda';
 import ReactSelect, {
   MenuPosition,
   DropdownIndicatorProps,
@@ -52,7 +52,13 @@ const Select = forwardRef<any, SelectProps>(
 
     const fixedPositionProps = {
       menuPortalTarget: document.body,
-      styles: { menuPortal: assoc('zIndex', 999999) },
+      styles: {
+        menuPortal: (base: any) => ({
+          ...base,
+          zIndex: 999999,
+          pointerEvents: 'all',
+        }),
+      },
       menuPosition: 'fixed' as MenuPosition,
     };
     const portalProps = strategy === STRATEGIES.fixed ? fixedPositionProps : {};
@@ -87,7 +93,7 @@ const Select = forwardRef<any, SelectProps>(
     };
 
     return (
-      <div className={cn('space-y-1.5', wrapperClassName)}>
+      <div className={cn('space-y-1', wrapperClassName)}>
         {!!label && (
           <Label className="flex text-sm leading-none" htmlFor={formItemId}>
             {label}

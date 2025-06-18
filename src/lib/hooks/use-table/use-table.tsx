@@ -136,7 +136,7 @@ export const useTable = <TData, TValue>({
     columns: columnData as ColumnDef<unknown, any>[],
     state: {
       columnVisibility,
-      rowSelection,
+      rowSelection: rowSelection || {},
       columnFilters,
       sorting: sortingProps,
       pagination: paginationProps,

@@ -67,15 +67,15 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Setup .npmrc
-        run: |
-          echo "@ajil-paul:registry=https://npm.pkg.github.com" > .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-          cat .npmrc
+      # - name: Setup .npmrc
+      #   run: |
+      #     echo "@ajil-paul:registry=https://npm.pkg.github.com" > .npmrc
+      #     echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+      #     cat .npmrc
 
       - name: Publish to GitHub Packages
         run: |
           echo "Publishing package..."
-          npm publish
+          npm publish  --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

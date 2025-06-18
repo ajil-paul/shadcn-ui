@@ -40,9 +40,6 @@
       "eslint --fix"
     ]
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "peerDependencies": {
     "@bigbinary/neeto-cist": "^1.0.15",
     "ramda": "^0.30.1",

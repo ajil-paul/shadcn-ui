@@ -14,15 +14,12 @@ export const FormMultiEmailInput = ({
   <Controller
     control={control}
     name={name}
-    render={({ field, fieldState }) => {
-      console.log(field, fieldState);
-      return (
-        <MultiEmailInput
-          {...field}
-          error={fieldState.error?.message}
-          {...otherProps}
-        />
-      );
-    }}
+    render={({ field, fieldState }) => (
+      <MultiEmailInput
+        {...field}
+        error={fieldState.error?.message}
+        {...otherProps}
+      />
+    )}
   />
 );

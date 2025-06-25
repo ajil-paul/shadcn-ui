@@ -47,8 +47,7 @@ export const Header = <TData, TValue>({
       >
         <Button
           variant="ghost"
-          size="sm"
-          className="h-8 data-[state=open]:bg-accent flex"
+          className="data-[state=open]:bg-accent flex"
           label={renderedHeader}
           icon={
             column.getIsSorted() === 'desc'

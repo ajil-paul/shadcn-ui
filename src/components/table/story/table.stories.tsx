@@ -36,6 +36,7 @@ export const Default = (args: TableProps) => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const table = useTable({
+    tableKey: 'task-list',
     data: TASKS,
     totalCount: TASKS.length,
     columns,

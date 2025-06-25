@@ -357,7 +357,7 @@ function Nav({
     <nav className={cn('flex items-center', className)}>
       <Button
         variant="outline"
-        className="absolute left-0 p-0 opacity-80 hover:opacity-100"
+        className="absolute left-0 p-1"
         size="icon"
         type="button"
         tabIndex={isPreviousDisabled ? undefined : -1}
@@ -376,7 +376,7 @@ function Nav({
 
       <Button
         variant="outline"
-        className="absolute right-0 p-0 opacity-80 hover:opacity-100"
+        className="absolute right-0 p-1"
         size="icon"
         type="button"
         tabIndex={isNextDisabled ? undefined : -1}
@@ -406,7 +406,7 @@ function CaptionLabel({
 } & React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <Button
-      className="justify-center w-full font-medium truncate h-7"
+      className="justify-center w-full h-7 font-medium truncate"
       variant="ghost"
       onClick={() => setNavView((prev) => (prev === 'days' ? 'years' : 'days'))}
     >

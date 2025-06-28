@@ -18,6 +18,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       to,
       icon,
       iconPosition = 'left',
+      href,
       ...otherProps
     },
     ref
@@ -27,32 +28,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       iconPosition === 'right' && 'flex-row-reverse justify-between'
     );
 
-    if (to)
-      return (
-        <Link to={to}>
-          <BaseButton
-            ref={ref}
-            className={buttonClassName}
-            disabled={loading || disabled}
-            variant={otherProps.variant || 'default'}
-            {...otherProps}
-          >
-            {loading
-              ? renderIcon(Loader2, {
-                  className: 'w-4 h-4 animate-spin',
-                  'data-testid': 'loading-spinner',
-                })
-              : renderIcon(icon)}
-            {renderLabel(label)}
-          </BaseButton>
-        </Link>
-      );
-
-    return (
+    const renderBaseButton = () => (
       <BaseButton
         ref={ref}
         className={buttonClassName}
         disabled={loading || disabled}
+        variant={otherProps.variant || 'default'}
         {...otherProps}
       >
         {loading
@@ -64,6 +45,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {renderLabel(label)}
       </BaseButton>
     );
+
+    if (to) return <Link to={to}>{renderBaseButton()}</Link>;
+
+    if (!!href) return <a href={href}>{renderBaseButton()}</a>;
+
+    return renderBaseButton();
   }
 );
 
